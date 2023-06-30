@@ -6,9 +6,10 @@ import { BankAccountService } from '../@core/domain/bank-account/bank-account.se
 import { DataSource } from 'typeorm';
 import { BankAccountTypeOrmRepository } from '../@core/infra/db/bank-account/bank-account.typeorm.repository';
 import { BankAccountRepository } from '../@core/domain/bank-account/bank-account.repository';
+import { TransactionSchema } from '../@core/infra/db/transaction/transaction.schema';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BankAccountSchema])],
+  imports: [TypeOrmModule.forFeature([BankAccountSchema, TransactionSchema])],
   controllers: [BankAccountsController],
   providers: [
     {
@@ -22,13 +23,10 @@ import { BankAccountRepository } from '../@core/domain/bank-account/bank-account
     },
     {
       provide: BankAccountService,
-      useFactory: (
-        repository: BankAccountRepository,
-        dataSource: DataSource,
-      ) => {
-        return new BankAccountService(repository, dataSource);
+      useFactory: (repository: BankAccountRepository) => {
+        return new BankAccountService(repository);
       },
-      inject: [BankAccountTypeOrmRepository, getDataSourceToken()],
+      inject: [BankAccountTypeOrmRepository],
     },
   ],
 })
