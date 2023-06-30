@@ -11,21 +11,11 @@ export class BankAccountTypeOrmRepository implements BankAccountRepository {
     await this.ormRepository.insert(model);
   }
 
-  async findByAccountNumber(
-    accountNumber: string,
-  ): Promise<BankAccount | null> {
-    const model = await this.ormRepository.findOneByOrFail({
-      account_number: accountNumber,
-    });
-    return new BankAccount(
-      { account_number: model.account_number, balance: model.balance },
-      model.id,
-    );
-  }
-
-  async update(bankAccount: BankAccount): Promise<void> {
-    await this.ormRepository.update(bankAccount.id, {
-      balance: bankAccount.balance,
-    });
+  async findById(id: string): Promise<BankAccount> {
+    const model = await this.ormRepository.findOneBy({ id });
+    if (model === null) {
+      throw new Error('Could not find bank account.');
+    }
+    return new BankAccount({ account_number: model.account_number }, model.id);
   }
 }
