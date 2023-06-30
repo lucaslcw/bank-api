@@ -1,4 +1,4 @@
-# REST API banking
+# REST API banking 🏦
 
 This is a simple API with banking operations, such as creating a bank account, transferring between 2 accounts and calculating the balance. This API was developed with NestJS, SQLite and Jest.
 
