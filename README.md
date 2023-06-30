@@ -4,7 +4,7 @@ This is a simple API with banking operations, such as creating a bank account, t
 
 ## Install
 
-      git clone https://github.com/lucaslcw/bank-api.git && npm install
+      git clone https://github.com/lucaslcw/banking-api.git && npm install
 
 ## Run the api
 
