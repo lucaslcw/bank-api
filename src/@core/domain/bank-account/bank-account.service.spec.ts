@@ -2,6 +2,7 @@ import { BankAccountSchema } from '../../infra/db/bank-account/bank-account.sche
 import { DataSource, Repository } from 'typeorm';
 import { BankAccountTypeOrmRepository } from '../../infra/db/bank-account/bank-account.typeorm.repository';
 import { BankAccountService } from './bank-account.service';
+import { TransactionSchema } from '../../infra/db/transaction/transaction.schema';
 
 describe('BankAccountService', () => {
   let dataSource: DataSource;
@@ -14,18 +15,22 @@ describe('BankAccountService', () => {
       type: 'sqlite',
       database: ':memory:',
       synchronize: true,
-      entities: [BankAccountSchema],
+      entities: [BankAccountSchema, TransactionSchema],
     });
     await dataSource.initialize();
     ormRepository = dataSource.getRepository(BankAccountSchema);
     repository = new BankAccountTypeOrmRepository(ormRepository);
-    bankAccountService = new BankAccountService(repository, dataSource);
+    bankAccountService = new BankAccountService(repository);
+
+    jest.spyOn(bankAccountService, 'create');
   });
 
   it('should create a new bank account', async () => {
     await bankAccountService.create('1111-11');
     const model = await ormRepository.findOneBy({ account_number: '1111-11' });
-    expect(model.balance).toBe(0);
+    expect(bankAccountService.create).toHaveBeenCalledTimes(1);
+    expect(bankAccountService.create).toHaveBeenCalledWith('1111-11');
+    expect(model.id).toBeDefined();
     expect(model.account_number).toBe('1111-11');
   });
 });
