@@ -1,6 +1,6 @@
 # REST API banking 🏦
 
-This is a simple API with banking operations, such as creating a bank account, transferring between 2 accounts and calculating the balance. This API was developed with NestJS, SQLite and Jest.
+This is a simple API with banking operations, such as creating a bank account, transferring between 2 accounts and calculating the balance. This API was developed with [NestJS](https://docs.nestjs.com/), [SQLite](https://www.sqlite.org/index.html) and [Jest](https://jestjs.io/pt-BR/).
 
 ## Install
 
