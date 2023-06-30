@@ -34,7 +34,7 @@ export class TransactionsController {
   @HttpCode(201)
   @Post('transfer')
   async transfer(@Body() transferDto: TransferDto) {
-    return await this.transactionService.transfer(
+    await this.transactionService.transfer(
       transferDto.source_bank_account_id,
       transferDto.destination_bank_account_id,
       transferDto.amount,

@@ -79,7 +79,7 @@ export class TransactionService {
       },
       destinationBankAccountBalance,
     );
-    return this.transactionRepository.transfer(
+    await this.transactionRepository.transfer(
       sourceTransaction,
       destinationTransaction,
     );
