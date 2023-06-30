@@ -9,7 +9,7 @@ import { TransactionService } from '../@core/domain/transaction/transaction.serv
 import { TransactionRepository } from '../@core/domain/transaction/transaction.repository';
 import { BankAccountTypeOrmRepository } from '../@core/infra/db/bank-account/bank-account.typeorm.repository';
 import { BankAccountRepository } from '../@core/domain/bank-account/bank-account.repository';
-import { BankAccountsModule } from 'src/bank-accounts/bank-accounts.module';
+import { BankAccountsModule } from '../bank-accounts/bank-accounts.module';
 
 @Module({
   imports: [
