@@ -29,5 +29,6 @@ import { TransactionSchema } from '../@core/infra/db/transaction/transaction.sch
       inject: [BankAccountTypeOrmRepository],
     },
   ],
+  exports: [BankAccountTypeOrmRepository],
 })
 export class BankAccountsModule {}
